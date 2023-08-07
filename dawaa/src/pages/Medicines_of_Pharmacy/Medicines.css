@@ -1,0 +1,6 @@
+.hover-id {
+    display: none;
+}
+.pharmacy_id:hover .hover-id{
+    display: block;
+}

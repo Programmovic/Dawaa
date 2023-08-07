@@ -1,0 +1,77 @@
+.login-registration-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.login-registration {
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+
+.login-registration h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.login-registration form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+}
+
+.login-registration input,
+.login-registration input:focus {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    font-size: 1rem;
+    background-color: #587286;
+    color: aliceblue;
+}
+
+
+.login-registration label {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.login-registration button[type='submit'] {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 10px;
+    background-color: #007bff;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.login-registration button[type='submit']:hover {
+    background-color: #0069d9;
+}
+
+.login-registration p {
+    text-align: center;
+}
+
+.login-registration a {
+    margin-top: 1rem;
+    display: block;
+    text-align: center;
+    font-size: 1rem;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-registration a:hover {
+    text-decoration: underli

@@ -1,0 +1,20 @@
+.medicines-table {
+    border-radius: 10px;
+    border: 1px solid transparent; /* set border-color to transparent */
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .medicines-table th,
+  .medicines-table td {
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid #ccc;
+  }
+  
+  .medicines-table td {
+    font-size: 1.2rem;
+  }
