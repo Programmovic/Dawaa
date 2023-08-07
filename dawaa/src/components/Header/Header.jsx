@@ -19,16 +19,21 @@ export default function Header() {
           </div>
           <nav className="col-auto">
             <ul className="list-unstyled d-flex mb-0">
-              <li className="nav-item">
-                <Link to="/register" className="nav-link">
-                  تسجيل
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/RegisterMedicine" className="nav-link">
-                  تسجيل دواء
-                </Link>
-              </li>
+              {pharmacyId ?
+                <li className="nav-item">
+                  <Link to={`/${pharmacyId}/medicines/add-new`} className="nav-link">
+                    تسجيل دواء
+                  </Link>
+                </li>
+                :
+                <li className="nav-item">
+                  <Link to="/register" className="nav-link">
+                    تسجيل
+                  </Link>
+                </li>
+                }
+
+
               <li className="nav-item">
                 <Link to="/medicines" className="nav-link">
                   الأدوية

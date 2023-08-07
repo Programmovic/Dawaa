@@ -117,6 +117,10 @@ app.get('/medicines', async (req, res) => {
     const medicines = await Medicine.find();
     res.json(medicines);
 });
+app.get('/medicines/:id', async (req, res) => {
+    const medicines = await Medicine.find({ _id: req.params.id });
+    res.json(medicines);
+});
 
 
 app.get('/medicines', async (req, res) => {
