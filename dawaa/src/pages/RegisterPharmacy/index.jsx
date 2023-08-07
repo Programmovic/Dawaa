@@ -21,6 +21,7 @@ export default function PharmacyRegistrationPage() {
   const [pharmacyLatitude, setPharmacyLatitude] = useState('');
   const [pharmacyLongitude, setPharmacyLongitude] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessageClassName, setErrorMessageClassName] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -41,13 +42,16 @@ export default function PharmacyRegistrationPage() {
       });
 
       setErrorMessage('تم تسجيل الصيدلية بنجاح.');
+      setErrorMessageClassName('bg-success');
 
       // You can redirect to a success page here
     } catch (error) {
       if (error.response.status === 400 && error.response.data.message === 'Username already exists') {
         setErrorMessage('اسم المستخدم موجود بالفعل.');
+        setErrorMessageClassName('bg-danger');
       } else {
         setErrorMessage('فشل تسجيل الصيدلية.');
+        setErrorMessageClassName('bg-danger');
       }
     }
   };
@@ -56,7 +60,7 @@ export default function PharmacyRegistrationPage() {
     <section className='registration'>
       <div className="container p-5 glass rounded-3 login-registration">
         <h1 className='mb-5'>تسجيل صيدلية جديدة</h1>
-        {errorMessage && <p className="text-light text-center bg-danger p-2 rounded-3">{errorMessage}</p>}
+        {errorMessage && <p className={`text-light text-center p-2 rounded-3 ${errorMessageClassName}`}>{errorMessage}</p>}
         <form onSubmit={handleSubmit}>
           <div className="row w-100">
             <div className="col mb-3">

@@ -74,4 +74,8 @@
 }
 
 .login-registration a:hover {
-    text-decoration: underli
+    text-decoration: underline;
+}
+.actions a:hover {
+    text-decoration: none;
+}
