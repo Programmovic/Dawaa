@@ -21,7 +21,7 @@ router.post("/register", async (req, res) => {
   const { pharmacy_password, pharmacy_username, ...pharmacyData } = req.body;
   try {
     const existingPharmacy = await Pharmacy.findOne({
-        pharmacy_username: pharmacy_username,
+      pharmacy_username: pharmacy_username,
     });
     if (existingPharmacy) {
       return res.status(400).json({ message: "Username already exists" });
