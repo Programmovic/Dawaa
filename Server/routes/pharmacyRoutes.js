@@ -51,7 +51,7 @@ router.post("/register", async (req, res) => {
 
 // Login
 router.post("/login", async (req, res) => {
-  const { pharmacy_username, pharmacy_password_hash } = req.body;
+  const { pharmacy_username, pharmacy_password } = req.body;
 
   try {
     const pharmacy = await Pharmacy.findOne({ pharmacy_username });
@@ -60,7 +60,7 @@ router.post("/login", async (req, res) => {
     }
 
     const match = await bcrypt.compare(
-      pharmacy_password_hash,
+      pharmacy_password,
       pharmacy.pharmacy_password_hash
     );
     if (!match) {
