@@ -1,14 +1,28 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const medicineSchema = new mongoose.Schema({
-  medicine_name: String,
-  medicine_description: String,
-  medicine_brand: String,
-  medicine_category: String,
-  medicine_price: Number,
-  pharmacy_id: mongoose.Schema.Types.ObjectId
-});
+const medicineSchema = new mongoose.Schema(
+  {
+    drugbank_id: String,
+    alternate_drugbank_ids: [String],
+    name: String,
+    description: String,
+    biotech_categories: [String],
+    cas_number: String,
+    unii: String,
+    groups: [String],
+    drug_type: String,
+    synthesis_references: String,
+    synonyms: [String],
+    organisms: [String],
+    ahfs_codes: [String],
+    food_interactions: [String],
+    pharmacy_ids: [mongoose.Schema.Types.ObjectId],
+    box_shape: String,
+    box_color: String,
+  },
+  { timestamps: true }
+);
 
-const Medicine = mongoose.model('Medicine', medicineSchema);
+const Medicine = mongoose.model("Medicine", medicineSchema);
 
 module.exports = Medicine;
