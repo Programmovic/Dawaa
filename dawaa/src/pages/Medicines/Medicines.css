@@ -1,20 +1,29 @@
-.medicines-table {
-    border-radius: 10px;
-    border: 1px solid transparent; /* set border-color to transparent */
-    width: 100%;
-    border-collapse: collapse;
-    margin: 2rem 0;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  
-  .medicines-table th,
-  .medicines-table td {
-    padding: 1rem;
-    text-align: center;
-    border: 1px solid #ccc;
-  }
-  
-  .medicines-table td {
-    font-size: 1.2rem;
-  }
+.medicines-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.medicine-box {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 20px;
+  width: 300px;
+  margin: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  text-align: center;
+  color: #fff;
+}
+
+.medicine-box h3 {
+  margin-bottom: 15px;
+}
+
+.medicine-box p {
+  margin: 5px 0;
+}

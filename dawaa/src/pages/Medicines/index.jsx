@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { Link } from 'react-router-dom';
-import './medicines.css'
+import './medicines.css';
 
 const MedicinesPage = () => {
   const [medicines, setMedicines] = useState([]);
@@ -13,7 +13,7 @@ const MedicinesPage = () => {
     const fetchMedicines = async () => {
       try {
         const token = Cookies.get('token');
-        const response = await axios.get('http://localhost:3001/medicines', {
+        const response = await axios.get('https://dawaa-bcwc.onrender.com/medicines', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -36,39 +36,28 @@ const MedicinesPage = () => {
     <section>
       <div className="container mt-4">
         <h1 className="text-center mb-4">قائمة الأدوية</h1>
-        {pharmacyId &&
+        {pharmacyId && (
           <Link to="/medicines/add-new" className="btn btn-primary mb-3">
             إضافة دواء جديد
-          </Link>}
+          </Link>
+        )}
         {errorMessage && (
           <p className="alert alert-danger">
             {medicines.length > 0 ? errorMessage : 'لا توجد أدوية لعرضها'}
           </p>
         )}
-        <table className='medicines-table glass'>
-          <thead>
-            <tr>
-              <th>اسم الدواء</th>
-              <th>الوصف</th>
-              <th>الشركة المصنعة</th>
-              <th>الفئة</th>
-              <th>السعر</th>
-              <th>رقم الصيدلية</th>
-            </tr>
-          </thead>
-          <tbody>
-            {medicines.map(medicine => (
-              <tr key={medicine._id}>
-                <td>{medicine.medicine_name || '-'}</td>
-                <td>{medicine.medicine_description || '-'}</td>
-                <td>{medicine.medicine_brand || '-'}</td>
-                <td>{medicine.medicine_category || '-'}</td>
-                <td>{medicine.medicine_price || '-'}</td>
-                <td>{medicine.pharmacy_id || '-'}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="medicines-container">
+          {medicines.map(medicine => (
+            <div key={medicine._id} className="medicine-box">
+              <h3>{medicine.name || '-'}</h3>
+              <p><strong>الوصف:</strong> {medicine.description || '-'}</p>
+              <p><strong>الشركة المصنعة:</strong> {medicine.medicine_brand || '-'}</p>
+              <p><strong>الفئة:</strong> {medicine.medicine_category || '-'}</p>
+              <p><strong>السعر:</strong> {medicine.medicine_price || '-'}</p>
+              <p><strong>رقم الصيدلية:</strong> {medicine.pharmacy_id || '-'}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

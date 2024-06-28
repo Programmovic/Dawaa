@@ -1,20 +1,17 @@
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
 import Cookies from 'js-cookie';
 import './Header.css';
 import LogoutButton from '../Logout/Logout';
 
 export default function Header() {
   const pharmacyId = Cookies.get('id');
-  const pharmacyName = Cookies.get('name');
   return (
     <header className="header-container py-2">
       <div className="container">
         <div className="row justify-content-between align-items-center">
           <div className="col-auto">
             <Link to="/">
-              <h1>دواء</h1>
+              <h1>فارماكو</h1>
             </Link>
           </div>
           <nav className="col-auto">
