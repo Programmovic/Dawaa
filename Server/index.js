@@ -8,7 +8,7 @@ const connectDB = require("./config");
 const pharmacyRoutes = require("./routes/pharmacyRoutes");
 const medicineRoutes = require("./routes/medicineRoutes");
 const userRoutes = require("./routes/userRoutes");
-
+//
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
