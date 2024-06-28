@@ -1,21 +1,21 @@
 const mongoose = require("mongoose");
 
-const pharmacySchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
-    pharmacy_username: { type: String, unique: true },
-    pharmacy_name: String,
-    pharmacy_password_hash: String,
-    pharmacy_address: String,
-    pharmacy_city: String,
-    pharmacy_state: String,
-    pharmacy_zip_code: String,
-    pharmacy_country: String,
-    pharmacy_phone_number: String,
-    pharmacy_latitude: String,
-    pharmacy_longitude: String,
+    username: { type: String, unique: true, required: true },
+    name: { type: String, required: true },
+    password_hash: { type: String, required: true },
+    email: { type: String, unique: true, required: true },
+    address: { type: String },
+    city: { type: String },
+    state: { type: String },
+    zip_code: { type: String },
+    country: { type: String },
+    phone_number: { type: String },
+    latitude: { type: String },
+    longitude: { type: String },
   },
   { timestamps: true }
 );
-const Pharmacy = mongoose.model("Pharmacy", pharmacySchema);
 
-module.exports = Pharmacy;
+module.exports = mongoose.models.User || mongoose.model("User", userSchema);
