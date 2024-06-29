@@ -35,7 +35,7 @@ router.post("/register", async (req, res) => {
       pharmacy_username: pharmacy_username,
     });
     await pharmacy.save();
-    res.json({ message: "Pharmacy Registered", pharmacy: pharmacy });
+    res.status(201).json({ message: "Pharmacy Registered", pharmacy: pharmacy });
   } catch (error) {
     console.error(error);
     if (
