@@ -19,7 +19,9 @@ const medicineSchema = new mongoose.Schema(
     pharmacy_ids: [mongoose.Schema.Types.ObjectId],
     box_shape: String,
     box_color: String,
+    category: String // Added category field
   },
   { timestamps: true }
 );
+
 module.exports = mongoose.models.Medicine || mongoose.model("Medicine", medicineSchema);
