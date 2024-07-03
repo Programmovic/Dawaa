@@ -44,13 +44,67 @@ router.post("/pharmacy/:id", async (req, res) => {
   }
 });
 
-// Create a new medicine
 router.post("/", async (req, res) => {
   try {
-    const medicine = new Medicine(req.body);
-    await medicine.save();
-    res.json(medicine);
+    let medicinesData = req.body;
+
+    // Ensure medicinesData is an array, even if only one item is provided
+    if (!Array.isArray(medicinesData)) {
+      medicinesData = [medicinesData];
+    }
+
+    // Validate each medicine data
+    const medicines = medicinesData.map((medicineData) => {
+      const {
+        drugbank_id,
+        alternate_drugbank_ids = [],
+        name,
+        description,
+        biotech_categories = [],
+        cas_number,
+        unii,
+        groups = [],
+        drug_type,
+        synthesis_references,
+        synonyms = [],
+        organisms = [],
+        ahfs_codes = [],
+        food_interactions = [],
+        pharmacy_ids = [],
+        box_shape,
+        box_color,
+        category,
+      } = medicineData;
+
+      return new Medicine({
+        drugbank_id,
+        alternate_drugbank_ids,
+        name,
+        description,
+        biotech_categories,
+        cas_number,
+        unii,
+        groups,
+        drug_type,
+        synthesis_references,
+        synonyms,
+        organisms,
+        ahfs_codes,
+        food_interactions,
+        pharmacy_ids,
+        box_shape,
+        box_color,
+        category,
+      });
+    });
+
+    // Save all medicines to the database
+    const savedMedicines = await Medicine.insertMany(medicines);
+
+    // Respond with the newly created medicines
+    res.json(savedMedicines);
   } catch (error) {
+    // Handle errors and respond with an error message
     res.status(500).json({ error: error.message });
   }
 });
@@ -58,7 +112,11 @@ router.post("/", async (req, res) => {
 // Update an existing medicine for a specific pharmacy
 router.put("/pharmacy/:id/:medicineId", async (req, res) => {
   try {
-    const medicine = await Medicine.findByIdAndUpdate(req.params.medicineId, req.body, { new: true });
+    const medicine = await Medicine.findByIdAndUpdate(
+      req.params.medicineId,
+      req.body,
+      { new: true }
+    );
     if (medicine && !medicine.pharmacy_ids.includes(req.params.id)) {
       medicine.pharmacy_ids.push(req.params.id);
       await medicine.save();
@@ -74,7 +132,9 @@ router.delete("/pharmacy/:id/:medicineId", async (req, res) => {
   try {
     const medicine = await Medicine.findById(req.params.medicineId);
     if (medicine) {
-      medicine.pharmacy_ids = medicine.pharmacy_ids.filter(id => id.toString() !== req.params.id);
+      medicine.pharmacy_ids = medicine.pharmacy_ids.filter(
+        (id) => id.toString() !== req.params.id
+      );
       if (medicine.pharmacy_ids.length === 0) {
         await Medicine.findByIdAndDelete(req.params.medicineId);
       } else {
