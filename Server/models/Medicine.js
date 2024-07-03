@@ -5,6 +5,7 @@ const medicineSchema = new mongoose.Schema(
     drugbank_id: String,
     alternate_drugbank_ids: [String],
     name: String,
+    imageUrl: String,
     description: String,
     biotech_categories: [String],
     cas_number: String,
