@@ -112,7 +112,7 @@ router.post("/", async (req, res) => {
 });
 router.put("/", async (req, res) => {
   try {
-    let medicinesData = req.body;
+    let medicinesData = await Medicine.find();
 
     // Ensure medicinesData is an array, even if only one item is provided
     if (!Array.isArray(medicinesData)) {
@@ -127,8 +127,8 @@ router.put("/", async (req, res) => {
         // Find the medicine by drugbank_id or _id and update it
         const updatedMedicine = await Medicine.findOneAndUpdate(
           { drugbank_id }, // Update condition
-          { imageUrl },    // Update imageUrl
-          { new: true }    // Return updated document
+          { imageUrl }, // Update imageUrl
+          { new: true } // Return updated document
         );
 
         return updatedMedicine;
