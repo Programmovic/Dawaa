@@ -204,7 +204,7 @@ router.delete("/duplicates", async (req, res) => {
   }
 });
 
-// Delete all medicines
+// Delete all medicines//
 router.delete("/", async (req, res) => {
   try {
     await Medicine.deleteMany({});
