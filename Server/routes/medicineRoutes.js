@@ -122,12 +122,12 @@ router.put("/", async (req, res) => {
     // Update each medicine with imageUrl
     const updatedMedicines = await Promise.all(
       medicinesData.map(async (medicineData) => {
-        const { drugbank_id, imageUrl } = medicineData;
+        const { _id } = medicineData;
 
         // Find the medicine by drugbank_id or _id and update it
         const updatedMedicine = await Medicine.findOneAndUpdate(
-          { drugbank_id }, // Update condition
-          { imageUrl }, // Update imageUrl
+          { _id: _id }, // Update condition
+          { imageUrl: "" }, // Update imageUrl
           { new: true } // Return updated document
         );
 
