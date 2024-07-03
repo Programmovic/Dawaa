@@ -110,6 +110,38 @@ router.post("/", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+router.put("/", async (req, res) => {
+  try {
+    let medicinesData = req.body;
+
+    // Ensure medicinesData is an array, even if only one item is provided
+    if (!Array.isArray(medicinesData)) {
+      medicinesData = [medicinesData];
+    }
+
+    // Update each medicine with imageUrl
+    const updatedMedicines = await Promise.all(
+      medicinesData.map(async (medicineData) => {
+        const { drugbank_id, imageUrl } = medicineData;
+
+        // Find the medicine by drugbank_id or _id and update it
+        const updatedMedicine = await Medicine.findOneAndUpdate(
+          { drugbank_id }, // Update condition
+          { imageUrl },    // Update imageUrl
+          { new: true }    // Return updated document
+        );
+
+        return updatedMedicine;
+      })
+    );
+
+    // Respond with the updated medicines
+    res.json(updatedMedicines);
+  } catch (error) {
+    // Handle errors and respond with an error message
+    res.status(500).json({ error: error.message });
+  }
+});
 
 // Update an existing medicine for a specific pharmacy
 router.put("/pharmacy/:id/:medicineId", async (req, res) => {
