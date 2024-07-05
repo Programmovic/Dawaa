@@ -75,10 +75,11 @@ router.post("/login", async (req, res) => {
       token,
       pharmacyId: pharmacy._id,
       pharmacyName: pharmacy.pharmacy_username,
+      role: "pharmacy"
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Login failed" });
+    res.status(500).json({ message: `Login failed: ${error.message}` });
   }
 });
 
