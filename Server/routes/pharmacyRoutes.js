@@ -68,7 +68,7 @@ router.post("/login", async (req, res) => {
     }
 
     const token = jwt.sign(
-      { id: pharmacy._id, pharmacy_username: pharmacy.pharmacy_username },
+      { id: pharmacy._id, pharmacy_username: pharmacy.pharmacy_username, role: "pharmacy" },
       "ADAM"
     );
     res.json({
