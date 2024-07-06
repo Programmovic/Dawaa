@@ -5,7 +5,7 @@ const Medicine = require("../models/Medicine.js");
 // Get all medicines
 router.get("/", async (req, res) => {
   try {
-    const medicines = await Medicine.find();
+    const medicines = await Medicine.find().populate("pharmacy_ids");
     res.json(medicines);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -186,18 +186,20 @@ router.delete("/duplicates", async (req, res) => {
     // Aggregate to find duplicate names
     const duplicates = await Medicine.aggregate([
       { $group: { _id: "$name", count: { $sum: 1 }, ids: { $push: "$_id" } } },
-      { $match: { count: { $gt: 1 } } } // Filter to keep only duplicates
+      { $match: { count: { $gt: 1 } } }, // Filter to keep only duplicates
     ]);
 
     // Flatten the array of duplicate IDs
-    const duplicateIds = duplicates.flatMap(dup => dup.ids.slice(1)); // Keep all IDs except the first one
+    const duplicateIds = duplicates.flatMap((dup) => dup.ids.slice(1)); // Keep all IDs except the first one
 
     // Delete medicines with duplicate IDs
-    const deleteResult = await Medicine.deleteMany({ _id: { $in: duplicateIds } });
+    const deleteResult = await Medicine.deleteMany({
+      _id: { $in: duplicateIds },
+    });
 
     res.json({
       message: `${deleteResult.deletedCount} medicines with duplicated names deleted.`,
-      deletedMedicines: deleteResult.deletedCount
+      deletedMedicines: deleteResult.deletedCount,
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
