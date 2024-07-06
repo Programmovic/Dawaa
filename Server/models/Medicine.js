@@ -17,12 +17,13 @@ const medicineSchema = new mongoose.Schema(
     organisms: [String],
     ahfs_codes: [String],
     food_interactions: [String],
-    pharmacy_ids: [mongoose.Schema.Types.ObjectId],
+    pharmacy_ids: [{ type: mongoose.Schema.Types.ObjectId, ref: "Pharmacy" }],
     box_shape: String,
     box_color: String,
-    category: String // Added category field
+    category: String, // Added category field
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.models.Medicine || mongoose.model("Medicine", medicineSchema);
+module.exports =
+  mongoose.models.Medicine || mongoose.model("Medicine", medicineSchema);
